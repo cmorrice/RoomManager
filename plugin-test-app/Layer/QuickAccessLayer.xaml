@@ -1,0 +1,22 @@
+﻿<Window x:Class="UnitePluginTestApp.Layer.QuickAccessLayer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:view="clr-namespace:UnitePluginTestApp.View"
+        mc:Ignorable="d"
+        Title="QuickAccessLayer">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <view:QuickAccessControl Grid.Column="0" Grid.Row="0" x:Name="quickAccessControl"/>
+        <view:QuickAccessIcons Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" x:Name="quickAccessIcons"/>
+        <view:StatusView Grid.Column="1" Grid.Row="0" x:Name="statusView" />
+    </Grid>
+</Window>

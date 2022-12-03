@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5DA7087A-D56E-4201-A68A-89C790324D74}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UnitePlugin</RootNamespace>
+    <AssemblyName>UnitePlugin</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <!-- Mark the project as being a test project -->
+    <SonarQubeTestProject>false</SonarQubeTestProject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ToTest|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\ToTest\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Appccelerate.EventBroker, Version=4.0.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Appccelerate.EventBroker.4.0.0\lib\netstandard2.0\Appccelerate.EventBroker.dll</HintPath>
+    </Reference>
+    <Reference Include="Appccelerate.Fundamentals, Version=2.8.0.0, Culture=neutral, PublicKeyToken=917bca444d1f2b4c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Appccelerate.Fundamentals.2.8.0\lib\portable-windows8+net45\Appccelerate.Fundamentals.dll</HintPath>
+    </Reference>
+    <Reference Include="HueApi, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HueApi.0.9.6\lib\net461\HueApi.dll</HintPath>
+    </Reference>
+    <Reference Include="HueApi.ColorConverters, Version=0.9.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HueApi.ColorConverters.0.9.5\lib\net461\HueApi.ColorConverters.dll</HintPath>
+    </Reference>
+    <Reference Include="Intel.Unite.Common, Version=4.1.5.39, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\external\Intel.Unite.Common\Intel.Unite.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Q42.HueApi, Version=3.20.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Q42.HueApi.3.20.0\lib\net45\Q42.HueApi.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Json.7.0.0\lib\net462\System.Net.Http.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.7.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.7.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClientUI\ClientUISetup.cs" />
+    <Compile Include="Constants\ModuleConstants.cs" />
+    <Compile Include="Hue\Light.cs" />
+    <Compile Include="Interfaces\IHubView.cs" />
+    <Compile Include="Interfaces\IMessenger.cs" />
+    <Compile Include="Model\Command\BaseCommand.cs" />
+    <Compile Include="Model\Command\CommandWraper.cs" />
+    <Compile Include="Model\EventArguments\EventArgumentTypes.cs" />
+    <Compile Include="Model\EventArguments\ShowAuthViewEventArgs.cs" />
+    <Compile Include="Model\EventArguments\ShowPartialBackgroundViewEventArgs.cs" />
+    <Compile Include="Model\EventArguments\ShowPresentationViewEventArgs.cs" />
+    <Compile Include="Model\EventArguments\ShowRibbonViewEventArgs.cs" />
+    <Compile Include="Interfaces\IHubViewManager.cs" />
+    <Compile Include="Model\EventArguments\HubViewEventArgs.cs" />
+    <Compile Include="Model\EventArguments\ShowStatusImageEventArgs.cs" />
+    <Compile Include="Model\EventArguments\StatusViewInternalEventArgs.cs" />
+    <Compile Include="Model\EventArguments\TogglePartialBackgroundViewEventArgs.cs" />
+    <Compile Include="Model\EventArguments\TogglePresentationViewEventArgs.cs" />
+    <Compile Include="Model\EventArguments\ToggleStatusViewEventArgs.cs" />
+    <Compile Include="Sensors\MockSensor.cs" />
+    <Compile Include="PluginModuleHandler.cs" />
+    <Compile Include="Sensors\MockSensorHandler.cs" />
+    <Compile Include="Sensors\PluginSensorManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sensors\SensorConfig.cs" />
+    <Compile Include="Static\MessagingEventBroker.cs" />
+    <Compile Include="Static\UnitePluginConfig.cs" />
+    <Compile Include="UI\Factory\StatusImageFactory.cs" />
+    <Compile Include="UI\Factory\BackgroundFactory.cs" />
+    <Compile Include="UI\Factory\PartialBackgroundFactory.cs" />
+    <Compile Include="UI\Factory\PresentationFactory.cs" />
+    <Compile Include="UI\Factory\QuickAccessAppFactory.cs" />
+    <Compile Include="UI\Factory\AuthImageFactory.cs" />
+    <Compile Include="UI\ImageViewBase.cs" />
+    <Compile Include="UI\QuickAccessApp.cs" />
+    <Compile Include="UI\PartialBackground.cs" />
+    <Compile Include="UI\Presentation.cs" />
+    <Compile Include="UI\Background.cs" />
+    <Compile Include="UI\AuthImage.cs" />
+    <Compile Include="UI\StatusImage.cs" />
+    <Compile Include="Utility\CryptoStrongRandom.cs" />
+    <Compile Include="Utility\UniteImageHelper.cs" />
+    <Compile Include="Utility\BoolToStringConverter.cs" />
+    <Compile Include="Utility\ConvertMessage.cs" />
+    <Compile Include="Utility\Messenger.cs" />
+    <Compile Include="UI\Factory\HubViewFactory.cs" />
+    <Compile Include="UI\Factory\QuickAccessIconFactory.cs" />
+    <Compile Include="UI\HubView.cs" />
+    <Compile Include="UI\HubViewBase.cs" />
+    <Compile Include="UI\QuickAccessIcon.cs" />
+    <Compile Include="UI\ViewBase.cs" />
+    <Compile Include="Utility\DeepCopy.cs" />
+    <Compile Include="Utility\HubViewManager.cs" />
+    <Compile Include="Utility\RelayCommand.cs" />
+    <Compile Include="Model\EventArguments\ToggleAuthViewEventArgs.cs" />
+    <Compile Include="ViewModel\PartialBackgroundViewModel.cs" />
+    <Compile Include="ViewModel\PresentationViewModel.cs" />
+    <Compile Include="ViewModel\BackgroundViewModel.cs" />
+    <Compile Include="ViewModel\Controls\AuthViewContolViewModel.cs" />
+    <Compile Include="ViewModel\Factory\GenericFactory.cs" />
+    <Compile Include="ViewModel\HubViewModel.cs" />
+    <Compile Include="ViewModel\Controls\PresentationControlViewModel.cs" />
+    <Compile Include="ViewModel\Controls\PartialBackgroundControlViewModel.cs" />
+    <Compile Include="ViewModel\QuickAccessAppViewModel.cs" />
+    <Compile Include="ViewModel\QuickAccessIconViewModel.cs" />
+    <Compile Include="ViewModel\Controls\RibbonViewContolViewModel.cs" />
+    <Compile Include="ViewModel\Controls\StatusViewControlViewModel.cs" />
+    <Compile Include="View\BackgroundView.xaml.cs">
+      <DependentUpon>BackgroundView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\AllControlsView.xaml.cs">
+      <DependentUpon>AllControlsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\AuthViewControlView.xaml.cs">
+      <DependentUpon>AuthViewControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\PartialBackgroundControlView.xaml.cs">
+      <DependentUpon>PartialBackgroundControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\PresentationControlView.xaml.cs">
+      <DependentUpon>PresentationControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PartialBackgroundView.xaml.cs">
+      <DependentUpon>PartialBackgroundView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PresentationView.xaml.cs">
+      <DependentUpon>PresentationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuickAccessAppView.xaml.cs">
+      <DependentUpon>QuickAccessAppView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuickAccessIconView.xaml.cs">
+      <DependentUpon>QuickAccessIconView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\RibbonViewControlView.xaml.cs">
+      <DependentUpon>RibbonViewControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\StatusViewControlView.xaml.cs">
+      <DependentUpon>StatusViewControlView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\BackgroundView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\AllControlsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\AuthViewControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\PartialBackgroundControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\PresentationControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PartialBackgroundView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PresentationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuickAccessAppView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuickAccessIconView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\RibbonViewControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Controls\StatusViewControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menu-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bluetooth-icon.png" />
+    <Resource Include="Images\business-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ClientUI\Source\fonts\IntelClear_WHans_Bd.eot" />
+    <None Include="ClientUI\Source\fonts\IntelClear_WHans_Bd.ttf" />
+    <None Include="ClientUI\Source\fonts\IntelClear_WHans_Lt.eot" />
+    <None Include="ClientUI\Source\fonts\IntelClear_WHans_Lt.ttf" />
+    <None Include="ClientUI\Source\fonts\IntelClear_WHans_Rg.eot" />
+    <None Include="ClientUI\Source\fonts\IntelClear_WHans_Rg.ttf" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientUI\Source\css\site.min.css" />
+    <EmbeddedResource Include="ClientUI\Source\HtmlContent.html" />
+    <EmbeddedResource Include="ClientUI\Source\js\HelloWorldControl.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\light.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>rd /s /q "$(SolutionDir)Builds\"</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>powershell.exe -ExecutionPolicy Bypass -NoProfile -NonInteractive -File "$(SolutionDir)\BuildTools\CreateAndSignCab.ps1" -SolutionDir "$(ProjectDir).." -SolutionName "$(SolutionName)" -TargetPath "$(TargetPath)" -ManifestGeneratorDir "$(SolutionDir)\BuildTools\ManifestGenerator"
+</PostBuildEvent>
+  </PropertyGroup>
+</Project>

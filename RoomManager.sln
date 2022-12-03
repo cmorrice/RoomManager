@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29403.142
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomManager", "UnitePlugin\RoomManager.csproj", "{5DA7087A-D56E-4201-A68A-89C790324D74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomManagerTest", "UnitePluginTest\RoomManagerTest.csproj", "{791772DD-8944-4003-922B-3D5652F66340}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C6734E5-E0DD-47D6-A7A4-DAEF6415181B}"
+	ProjectSection(SolutionItems) = preProject
+		buildtools\CreateAndSignCab.ps1 = buildtools\CreateAndSignCab.ps1
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomManagerTestApp", "plugin-test-app\RoomManagerTestApp.csproj", "{DB176B3C-95E9-475D-9769-51B3E9119232}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		ToTest|Any CPU = ToTest|Any CPU
+		ToTest|x64 = ToTest|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DA7087A-D56E-4201-A68A-89C790324D74}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{5DA7087A-D56E-4201-A68A-89C790324D74}.Debug|x64.ActiveCfg = Debug|x64
+		{5DA7087A-D56E-4201-A68A-89C790324D74}.Debug|x64.Build.0 = Debug|x64
+		{5DA7087A-D56E-4201-A68A-89C790324D74}.Release|Any CPU.ActiveCfg = Release|x64
+		{5DA7087A-D56E-4201-A68A-89C790324D74}.Release|x64.ActiveCfg = Release|x64
+		{5DA7087A-D56E-4201-A68A-89C790324D74}.Release|x64.Build.0 = Release|x64
+		{5DA7087A-D56E-4201-A68A-89C790324D74}.ToTest|Any CPU.ActiveCfg = ToTest|x64
+		{5DA7087A-D56E-4201-A68A-89C790324D74}.ToTest|x64.ActiveCfg = ToTest|x64
+		{5DA7087A-D56E-4201-A68A-89C790324D74}.ToTest|x64.Build.0 = ToTest|x64
+		{791772DD-8944-4003-922B-3D5652F66340}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{791772DD-8944-4003-922B-3D5652F66340}.Debug|x64.ActiveCfg = Debug|x64
+		{791772DD-8944-4003-922B-3D5652F66340}.Debug|x64.Build.0 = Debug|x64
+		{791772DD-8944-4003-922B-3D5652F66340}.Release|Any CPU.ActiveCfg = Release|x64
+		{791772DD-8944-4003-922B-3D5652F66340}.Release|x64.ActiveCfg = Release|x64
+		{791772DD-8944-4003-922B-3D5652F66340}.Release|x64.Build.0 = Release|x64
+		{791772DD-8944-4003-922B-3D5652F66340}.ToTest|Any CPU.ActiveCfg = ToTest|x64
+		{791772DD-8944-4003-922B-3D5652F66340}.ToTest|x64.ActiveCfg = ToTest|x64
+		{791772DD-8944-4003-922B-3D5652F66340}.ToTest|x64.Build.0 = ToTest|x64
+		{DB176B3C-95E9-475D-9769-51B3E9119232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB176B3C-95E9-475D-9769-51B3E9119232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB176B3C-95E9-475D-9769-51B3E9119232}.Debug|x64.ActiveCfg = Debug|x64
+		{DB176B3C-95E9-475D-9769-51B3E9119232}.Debug|x64.Build.0 = Debug|x64
+		{DB176B3C-95E9-475D-9769-51B3E9119232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB176B3C-95E9-475D-9769-51B3E9119232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB176B3C-95E9-475D-9769-51B3E9119232}.Release|x64.ActiveCfg = Release|x64
+		{DB176B3C-95E9-475D-9769-51B3E9119232}.Release|x64.Build.0 = Release|x64
+		{DB176B3C-95E9-475D-9769-51B3E9119232}.ToTest|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB176B3C-95E9-475D-9769-51B3E9119232}.ToTest|Any CPU.Build.0 = Debug|Any CPU
+		{DB176B3C-95E9-475D-9769-51B3E9119232}.ToTest|x64.ActiveCfg = Debug|x64
+		{DB176B3C-95E9-475D-9769-51B3E9119232}.ToTest|x64.Build.0 = Debug|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81804253-4B48-4A64-985D-F4E3467B5C10}
+	EndGlobalSection
+EndGlobal
