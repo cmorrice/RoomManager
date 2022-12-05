@@ -12,7 +12,6 @@ using Intel.Unite.Common.Logging;
 using UnitePlugin.ClientUI;
 using UnitePlugin.Constants;
 using UnitePlugin.Utility;
-using UnitePlugin.Sensors;
 using UnitePlugin.Model.EventArguments;
 using UnitePlugin.Static;
 using UnitePlugin.UI;
@@ -85,9 +84,6 @@ namespace UnitePlugin
         {
             UnitePluginConfig.RuntimeContext = RuntimeContext;
             UnitePluginConfig.HubViewManager = new HubViewManager(RuntimeContext, CurrentUiDispatcher, CreateContract);
-            
-            //SensorConfig.Setup();
-            //MockSensor.Start();
 
             UnitePluginConfig.HubViewManager.LoadandAllocateForAllDisplays(HubView.Type.QuickAccessIcon);
             UnitePluginConfig.HubViewManager.LoadandAllocateForAllDisplays(HubView.Type.QuickAccessApp);

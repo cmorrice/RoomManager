@@ -162,12 +162,8 @@
     <Compile Include="Model\EventArguments\TogglePartialBackgroundViewEventArgs.cs" />
     <Compile Include="Model\EventArguments\TogglePresentationViewEventArgs.cs" />
     <Compile Include="Model\EventArguments\ToggleStatusViewEventArgs.cs" />
-    <Compile Include="Sensors\MockSensor.cs" />
     <Compile Include="PluginModuleHandler.cs" />
-    <Compile Include="Sensors\MockSensorHandler.cs" />
-    <Compile Include="Sensors\PluginSensorManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sensors\SensorConfig.cs" />
     <Compile Include="Static\MessagingEventBroker.cs" />
     <Compile Include="Static\UnitePluginConfig.cs" />
     <Compile Include="UI\Factory\StatusImageFactory.cs" />

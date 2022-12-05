@@ -7,7 +7,6 @@ using System.Windows.Threading;
 using UnitePlugin.Constants;
 using UnitePlugin.Interfaces;
 using UnitePlugin.Model.EventArguments;
-using UnitePlugin.Sensors;
 using UnitePlugin.Utility;
 using UnitePlugin.ViewModel.Controls;
 using UnitePlugin.ViewModel.Factory;
@@ -27,7 +26,7 @@ namespace UnitePlugin.Static
         public static IHubModuleRuntimeContext RuntimeContext { get; set; }
 
         public static MarshalNativeHandleContract Contract { get; set; }
-        public static PluginSensorManager PluginSensorManager { get; internal set; }
+
         public static IHubViewManager HubViewManager { get; set; }
 
         public static void SetHubViewManager(IHubViewManager hubViewManager)
