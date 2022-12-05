@@ -175,28 +175,32 @@ namespace UnitePlugin.View
             }
         }
 
+        // this function checks if preset exists (given name) and returns settings if it does
         private TextBlock ListContains(string key)
         {
+            // iterate through list of presets to check if specified preset exists
             foreach (TextBlock item in Preset_List.Items)
             {
                 if (item.Text == key)
                 {
+                    // if exists, return preset
                     return item;
                 }
             }
-
+            // otherwise, return null
             return null;
         }
 
-
+        // this function saves preset in memory
         private async void Save_Preset_Click(object sender, RoutedEventArgs e)
         {
             if (sender == null)
             {
                 return;
             }
-
+            // determine if specified preset exists
             TextBlock item = ListContains(Preset_Box.Text);
+            // if does not exist, create and store preset
             if (item == null)
             {
                 item = new TextBlock();
@@ -205,7 +209,7 @@ namespace UnitePlugin.View
                 Preset_List.Items.Add(item);
             }
 
-            // save stuff into the object
+            // save light settings into the object
             try
             {
                 ILocalHueClient client = QuickAccessAppView.client;
@@ -226,7 +230,7 @@ namespace UnitePlugin.View
             _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Preset {item.Text} saved", 1000);
         }
 
-
+        // this function loads existing preset from memory and applies settings
         private async void Load_Preset_Click(object sender, RoutedEventArgs e)
         {
             if (sender == null)
@@ -234,7 +238,10 @@ namespace UnitePlugin.View
                 return;
             }
 
+            // check if preset exists and extract saved settings
             TextBlock item = ListContains(Preset_Box.Text);
+
+            // if preset does not exist, inform user
             if (item == null)
             {
                 _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Preset {Preset_Box.Text} does not exist", 1000);
@@ -245,8 +252,10 @@ namespace UnitePlugin.View
             try
             {
                 ILocalHueClient client = QuickAccessAppView.client;
-                List<Q42.HueApi.Light> lights = item.Tag as List<Q42.HueApi.Light>;
+                List<Q42.HueApi.Light> lights = item.Tag as List<Q42.HueApi.Light>; // item.Tag stores actual light settings
 
+                
+                // iterate through each light and apply presets
                 foreach (Q42.HueApi.Light light in lights)
                 {
                     State state = light.State;
@@ -260,7 +269,7 @@ namespace UnitePlugin.View
                     await client.SendCommandAsync(command, new string[1] { light.Id });
                 }
 
-                // apply the preset somehow
+                // inform that preset was successfully applied
                 _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Preset {item.Text} applied", 1000);
             }
             catch (Exception)
