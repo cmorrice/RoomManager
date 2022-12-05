@@ -287,13 +287,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\menu-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\bluetooth-icon.png" />
-    <Resource Include="Images\business-user.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="ClientUI\Source\fonts\IntelClear_WHans_Bd.eot" />
     <None Include="ClientUI\Source\fonts\IntelClear_WHans_Bd.ttf" />

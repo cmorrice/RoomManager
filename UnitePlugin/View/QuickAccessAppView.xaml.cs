@@ -92,7 +92,9 @@ namespace UnitePlugin.View
             Device_Grid.Items.Add(thisLight);
         }
 
-
+        /**
+         * brightness slider handler --> updates the light connected to the slider
+         */
         private async void Brightness_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (sender == null || deviceReady == false || activeLight == null)
@@ -100,6 +102,8 @@ namespace UnitePlugin.View
                 return;
             }
 
+            // this handler only runs if the mouse is specifically over the slider
+            // it also only runs roughly 1/8 of the time so the API isn't overloaded
             Slider brightness = sender as Slider;
             if (brightness.IsMouseOver == false || (int) brightness.Value % 8 != 0) // if value is changed within code return
             {
@@ -108,6 +112,7 @@ namespace UnitePlugin.View
 
             ILocalHueClient client = QuickAccessAppView.client;
 
+            // attempt to change the brightness of the light
             try
             {
                 Q42.HueApi.Light thisLight = await client.GetLightAsync(activeLight.id);
@@ -124,6 +129,54 @@ namespace UnitePlugin.View
             }
         }
 
+        /**
+         * This handler only runs once the slider drag is finished
+         * Unlike value changed handler, this will always run
+         */
+        private async void Brightness_Slider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            if (sender == null)
+            {
+                return;
+            }
+
+            if (deviceReady == false)
+            {
+                _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Device bridge not connected", 1000);
+                return;
+            }
+
+            if (activeLight == null)
+            {
+                _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"No device is chosen", 1000);
+                return;
+            }
+
+            Slider brightness = sender as Slider;
+
+            ILocalHueClient client = QuickAccessAppView.client;
+
+            try
+            {
+                Q42.HueApi.Light thisLight = await client.GetLightAsync(activeLight.id);
+
+                // sets the light brightness to the slider value
+                var command = new Q42.HueApi.LightCommand();
+                command.On = true;
+                command.Brightness = (byte)brightness.Value;
+
+                await client.SendCommandAsync(command, new string[1] { activeLight.id });
+                _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Light {activeLight.id} changed brightness", 1000);
+            }
+            catch (Exception)
+            {
+                _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Light {activeLight.id} failed to change brightness", 1000);
+            }
+        }
+
+        /**
+         * on/off button handler --> turns the light connected to this button on or off
+         */
         private async void ToggleOn_Click(object sender, RoutedEventArgs e)
         {
             if (sender == null)
@@ -143,20 +196,23 @@ namespace UnitePlugin.View
                 return;
             }
 
+            // attempt to turn the light on/off
             try
             {
                 ILocalHueClient client = QuickAccessAppView.client;
 
+                // get the current lights status
                 Q42.HueApi.Light thisLight = await client.GetLightAsync(activeLight.id);
 
                 var command = new Q42.HueApi.LightCommand();
                 command.On = true;
 
+                // if this light is on, turn it off
                 if (thisLight.State.On == true)
                 {
                     command.TurnOff();
                 }
-                else
+                else // if it is off, turn it on
                 {
                     if (thisLight.State.Brightness == 0)
                     {
@@ -165,8 +221,10 @@ namespace UnitePlugin.View
                     command.TurnOn();
                 }
 
+                // send the command to the light
                 await client.SendCommandAsync(command, new string[1] { activeLight.id });
 
+                // change the UI to show the correct on/off state
                 string state = thisLight.State.On ? "off" : "on";
                 _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Light {activeLight.id} successfully turned {state}", 1000);
 
@@ -281,6 +339,9 @@ namespace UnitePlugin.View
             }
         }
 
+        /**
+         * set color button handler --> changes the light to the color in the color text box
+         */
         private async void Color_Button_Click(object sender, RoutedEventArgs e)
         {
             if (sender == null)
@@ -300,29 +361,10 @@ namespace UnitePlugin.View
                 return;
             }
 
-
-
-            //HSB color = null;
-            //try
-            //{
-            //    color = HexToHSB(Light_Color.Text);
-            //    if (color == null)
-            //    {
-            //        _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Color {Light_Color.Text} is invalid", 1000);
-            //        return;
-            //    }
-            //}
-            //catch (Exception e3)
-            //{
-            //    _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Hex thing super failed", 1000);
-            //    TextBlock error = new TextBlock();
-            //    error.Text = e3.Message;
-            //    Preset_List.Items.Add(error);
-            //}
-
             double[] color = null;
             try
             {
+                // convert the hex color to the Hue x,y coordinate
                 Color temp = (Color) ColorConverter.ConvertFromString(Light_Color.Text);
                 color = getRGBtoXY(temp);
             }
@@ -341,18 +383,11 @@ namespace UnitePlugin.View
 
                 var command = new LightCommand();
 
+                // set the light to the color we got
                 command.SetColor(color[0], color[1]);
-
-                //command.Hue = color.Hue;
-                //command.Saturation = color.Saturation;
-                //command.Brightness = (byte) color.Brightness;
-
-                // change the brightness slider to corrospond
-                //Brightness_Slider.Value = (double) command.Brightness;
 
                 await client.SendCommandAsync(command, new string[1] { activeLight.id });
                 _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Light {activeLight.id} successfully changed to {Light_Color.Text}", 1000);
-                //activeLight.Background = (SolidColorBrush) new BrushConverter().ConvertFromString(Light_Color.Text);
             }
             catch (Exception)
             {
@@ -360,46 +395,9 @@ namespace UnitePlugin.View
             }
         }
 
-        private async void Brightness_Slider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
-        {
-            if (sender == null)
-            {
-                return;
-            }
-
-            if (deviceReady == false)
-            {
-                _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Device bridge not connected", 1000);
-                return;
-            }
-
-            if (activeLight == null)
-            {
-                _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"No device is chosen", 1000);
-                return;
-            }
-
-            Slider brightness = sender as Slider;
-
-            ILocalHueClient client = QuickAccessAppView.client;
-
-            try
-            {
-                Q42.HueApi.Light thisLight = await client.GetLightAsync(activeLight.id);
-
-                var command = new Q42.HueApi.LightCommand();
-                command.On = true;
-                command.Brightness = (byte)brightness.Value;
-
-                await client.SendCommandAsync(command, new string[1] { activeLight.id });
-                _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Light {activeLight.id} changed brightness", 1000);
-            }
-            catch (Exception)
-            {
-                _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Light {activeLight.id} failed to change brightness", 1000);
-            }
-        }
-
+        /**
+         * converts an Color object to the Hue XY coordinate
+         */
         public static double[] getRGBtoXY(Color c)
         {
             // For the hue bulb the corners of the triangle are:

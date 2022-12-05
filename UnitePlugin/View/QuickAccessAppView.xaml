@@ -262,7 +262,6 @@
                               Background="Transparent"
                               BorderBrush="{StaticResource TextBoxBackground}"
                               BorderThickness="5">
-                        <TextBlock Text="Default" Foreground="{StaticResource ButtonForeground}"/>
                     </ListView>
                 </Grid>
 

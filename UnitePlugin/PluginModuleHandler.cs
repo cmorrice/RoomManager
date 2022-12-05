@@ -45,7 +45,7 @@ namespace UnitePlugin
         private void ConfigureModuleForClient()
         {
             FeatureModuleType = FeatureModuleType.Html;
-            ModuleImage = UniteImageHelper.GetUniteImageFromResource("/UnitePlugin;component/Images/menu-icon.png", UniteImageType.Png);
+            ModuleImage = UniteImageHelper.GetUniteImageFromResource("/UnitePlugin;component/Images/light.png", UniteImageType.Png);
             _html = ClientUiSetup.GetHtml();
         }
 

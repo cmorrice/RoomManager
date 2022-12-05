@@ -11,11 +11,13 @@ using Q42.HueApi.Interfaces;
 using System.Threading.Tasks;
 using UnitePlugin.View;
 using HueApi.ColorConverters.HSB;
+using UnitePlugin.Static;
 
 namespace UnitePlugin.Hue
 {
     public class Light : Border
     {
+        // the ID of the light --> gotten from the Hue bridge
         public string id;
         public Light(string id)
         {
@@ -47,55 +49,34 @@ namespace UnitePlugin.Hue
             // set up this button
             this.HorizontalAlignment = HorizontalAlignment.Center;
             this.VerticalAlignment = VerticalAlignment.Center;
-
-            // get the actual light color and set it to this
-            Task.Run(() => this.SetActualColor());
         }
 
+        /**
+         * the handler that controls the UI when this light button is clicked
+         */
         private async void LightOnClick(object sender, RoutedEventArgs e)
         {
             QuickAccessAppView window = QuickAccessAppView.presentWindow;
             if (sender == null || QuickAccessAppView.deviceReady == false)
             {
+                _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Device not ready yet", 1000);
                 return;
             }
 
+            // set the activeLight to this light object
             QuickAccessAppView.activeLight = this;
 
             ILocalHueClient client = QuickAccessAppView.client;
 
-            Q42.HueApi.Light thisLight = await client.GetLightAsync(this.id);
-
-            window.PowerToggle.Content = (thisLight.State.On == true) ? "Turn Off" : "Turn On";
-            window.Brightness_Slider.Value = thisLight.State.Brightness;
-            window.Light_Color.Text = "";
-
-            if (thisLight.State.Hue == null ||
-                thisLight.State.Saturation == null)
-            {
-                return;
-            }
-
-            // get the lights color
-            HSB converter = new HSB((int)thisLight.State.Hue, (int)thisLight.State.Saturation, thisLight.State.Brightness);
-            HueApi.ColorConverters.RGBColor color = converter.GetRGB();
-
-            window.Light_Color.Text = "#" + color.ToHex();
-        }
-
-        public async Task SetActualColor()
-        {
-            QuickAccessAppView window = QuickAccessAppView.presentWindow;
-            if (QuickAccessAppView.deviceReady == false)
-            {
-                return;
-            }
-
             try
             {
-                ILocalHueClient client = QuickAccessAppView.client;
-
+                // get information on this light
                 Q42.HueApi.Light thisLight = await client.GetLightAsync(this.id);
+
+                // change the UI to have the information of this light
+                window.PowerToggle.Content = (thisLight.State.On == true) ? "Turn Off" : "Turn On";
+                window.Brightness_Slider.Value = thisLight.State.Brightness;
+                window.Light_Color.Text = "";
 
                 if (thisLight.State.Hue == null ||
                     thisLight.State.Saturation == null)
@@ -105,20 +86,15 @@ namespace UnitePlugin.Hue
 
                 // get the lights color
                 HSB converter = new HSB((int)thisLight.State.Hue, (int)thisLight.State.Saturation, thisLight.State.Brightness);
-                string color = "#" + converter.GetRGB().ToHex();
+                HueApi.ColorConverters.RGBColor color = converter.GetRGB();
 
-                // change the color box to have the color in hex
-                if (window.Light_Color.Text != color)
-                {
-                    window.Light_Color.Text = color;
-                }
-
-                // set this lights background to the actual lights background
-                //this.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(color);
+                // updates the color text box
+                window.Light_Color.Text = "#" + color.ToHex();
             }
             catch (Exception)
             {
-                // ignore this sucker
+                _ = UnitePluginConfig.RuntimeContext.DisplayManager.TryShowToastMessage($"Failed to get information on light {this.id}", 1000);
+                QuickAccessAppView.activeLight = null;
             }
         }
     }

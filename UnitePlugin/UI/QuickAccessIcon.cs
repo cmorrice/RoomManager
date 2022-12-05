@@ -69,7 +69,7 @@ namespace UnitePlugin.UI
                                    ModuleConstants.ModuleInfo.Id + "\\" + ModuleConstants.EntryPoint);
 
                 _quickAccessIconViewModel.Image = Intel.Unite.Common.Utils.BytesHelper.SetImageFromResource(Guid.NewGuid(),
-                        UniteImageType.Png, "UnitePlugin.Images.menu-icon.png", Assembly.LoadFrom(assemblyPath));
+                        UniteImageType.Png, "UnitePlugin.Images.light.png", Assembly.LoadFrom(assemblyPath));
             });
         }
     }
